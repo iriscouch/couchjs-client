@@ -1,0 +1,158 @@
+Exit 1663
+couchjs 1721: /home/jhs/src/iris/couchdb/share/server/main.js
+Call main
+STDIN 1721: ["ddoc","new","_design/test",{"_id":"_design/test","_rev":"1-ade3200bc66db5d491c39234e48d4385","language":"javascript","rewrites":[{"from":"foo","to":"foo.txt"},{"from":"foo2","to":"foo.txt","method":"GET"},{"from":"hello/:id","to":"_update/hello/:id","method":"PUT"},{"from":"/welcome","to":"_show/welcome"},{"from":"/welcome/:name","to":"_show/welcome","query":{"name":":name"}},{"from":"/welcome2","to":"_show/welcome","query":{"name":"user"}},{"from":"/welcome3/:name","to":"_update/welcome2/:name","method":"PUT"},{"from":"/welcome3/:name","to":"_show/welcome2/:name","method":"GET"},{"from":"/welcome4/*","to":"_show/welcome3","query":{"name":"*"}},{"from":"/welcome5/*","to":"_show/*","query":{"name":"*"}},{"from":"basicView","to":"_view/basicView"},{"from":"simpleForm/basicView","to":"_list/simpleForm/basicView"},{"from":"simpleForm/basicViewFixed","to":"_list/simpleForm/basicView","query":{"startkey":3,"endkey":8}},{"from":"simpleForm/basicViewPath/:start/:end","to":"_list/simpleForm/basicView","query":{"startkey":":start","endkey":":end"},"formats":{"start":"int","end":"int"}},{"from":"simpleForm/complexView","to":"_list/simpleForm/complexView","query":{"key":[1,2]}},{"from":"simpleForm/complexView2","to":"_list/simpleForm/complexView","query":{"key":["test",{}]}},{"from":"simpleForm/complexView3","to":"_list/simpleForm/complexView","query":{"key":["test",["test","essai"]]}},{"from":"simpleForm/complexView4","to":"_list/simpleForm/complexView2","query":{"key":{"c":1}}},{"from":"simpleForm/complexView5/:a/:b","to":"_list/simpleForm/complexView3","query":{"key":[":a",":b"]}},{"from":"simpleForm/complexView6","to":"_list/simpleForm/complexView3","query":{"key":[":a",":b"]}},{"from":"simpleForm/complexView7/:a/:b","to":"_view/complexView3","query":{"key":[":a",":b"],"include_docs":":doc"},"format":{"doc":"bool"}},{"from":"/","to":"_view/basicView"}],"lists":{"simpleForm":"(function (head, req) {\n              log(\"simpleForm\");\n              send('<ul>');\n              var row, row_number = 0, prevKey, firstKey = null;\n              while (row = getRow()) {\n                row_number += 1;\n                if (!firstKey) firstKey = row.key;\n                prevKey = row.key;\n                send('\\n<li>Key: '+row.key\n                     +' Value: '+row.value\n                     +' LineNo: '+row_number+'</li>');\n              }\n              return '</ul><p>FirstKey: '+ firstKey + ' LastKey: '+ prevKey+'</p>';\n            })"},"shows":{"welcome":"(function (doc,req) {\n              return \"Welcome \" + req.query[\"name\"];\n            })","welcome2":"(function (doc, req) {\n              return \"Welcome \" + doc.name;\n            })","welcome3":"(function (doc,req) {\n              return \"Welcome \" + req.query[\"name\"];\n            })"},"updates":{"hello":"(function (doc, req) {\n              if (!doc) {\n                if (req.id) {\n                  return [{\n                    _id : req.id\n                  }, \"New World\"]\n                }\n                return [null, \"Empty World\"];\n              }\n              doc.world = \"hello\";\n              doc.edited_by = req.userCtx;\n              return [doc, \"hello doc\"];\n            })","welcome2":"(function (doc, req) {\n              if (!doc) {\n                if (req.id) {\n                  return [{\n                    _id: req.id,\n                    name: req.id\n                  }, \"New World\"]\n                }\n                return [null, \"Empty World\"];\n              }\n              return [doc, \"hello doc\"];\n            })"},"views":{"basicView":{"map":"(function (doc) {\n                if (doc.integer) {\n                  emit(doc.integer, doc.string);\n                }\n                \n              })"},"complexView":{"map":"(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit([doc.a, doc.b], doc.string);\n                }\n              })"},"complexView2":{"map":"(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit(doc.a, doc.string);\n                }\n              })"},"complexView3":{"map":"(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit(doc.b, doc.string);\n                }\n              })"}},"_attachments":{"foo.txt":{"content_type":"text/plain","revpos":1,"digest":"md5-qUUYqS41RhwF0TrCsTAxFg==","length":29,"stub":true}}}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["ddoc","_design/test",["updates","hello"],[{"_id":"e6a925b26a5ddd0c42a335fc8401eee8","_rev":"1-3e6cde7286c8b41dc36a5bf9ca346449","word":"plankton","name":"Rusty","_revisions":{"start":1,"ids":["3e6cde7286c8b41dc36a5bf9ca346449"]}},{"info":{"db_name":"test_suite_db","doc_count":17,"doc_del_count":0,"update_seq":17,"purge_seq":0,"compact_running":false,"disk_size":7014,"data_size":4775,"instance_start_time":"1359566304089086","disk_format_version":6,"committed_update_seq":0},"id":"e6a925b26a5ddd0c42a335fc8401eee8","uuid":"c3e093a931e8e21c58013f7959000451","method":"PUT","requested_path":["test_suite_db","_design","test","_rewrite","hello","e6a925b26a5ddd0c42a335fc8401eee8"],"path":["test_suite_db","_design","test","_update","hello","e6a925b26a5ddd0c42a335fc8401eee8"],"raw_path":"/test_suite_db/_design/test/_update/hello/e6a925b26a5ddd0c42a335fc8401eee8?id=e6a925b26a5ddd0c42a335fc8401eee8","query":{"id":"e6a925b26a5ddd0c42a335fc8401eee8"},"headers":{"Accept":"application/json","Accept-Encoding":"gzip, deflate","Accept-Language":"en-US,en;q=0.5","Connection":"keep-alive","Content-Length":"0","Content-Type":"application/json; charset=UTF-8","Host":"localhost:5984","Referer":"http://localhost:5984/_utils/couch_tests.html?script/couch_tests.js","User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0","x-couchdb-requested-path":"/test_suite_db/_design/test/_rewrite/hello/e6a925b26a5ddd0c42a335fc8401eee8"},"body":"","peer":"127.0.0.1","form":{},"cookie":{},"userCtx":{"db":"test_suite_db","name":null,"roles":["_admin"]},"secObj":{}}]]
+STDOUT 1721: ["up",{"_id":"e6a925b26a5ddd0c42a335fc8401eee8","_rev":"1-3e6cde7286c8b41dc36a5bf9ca346449","word":"plankton","name":"Rusty","_revisions":{"start":1,"ids":["3e6cde7286c8b41dc36a5bf9ca346449"]},"world":"hello","edited_by":{"db":"test_suite_db","name":null,"roles":["_admin"]}},{"body":"hello doc"}]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["ddoc","_design/test",["updates","welcome2"],[null,{"info":{"db_name":"test_suite_db","doc_count":17,"doc_del_count":0,"update_seq":18,"purge_seq":0,"compact_running":false,"disk_size":8402,"data_size":4903,"instance_start_time":"1359566304089086","disk_format_version":6,"committed_update_seq":0},"id":"test","uuid":"c3e093a931e8e21c58013f795900134c","method":"PUT","requested_path":["test_suite_db","_design","test","_rewrite","welcome3","test"],"path":["test_suite_db","_design","test","_update","welcome2","test"],"raw_path":"/test_suite_db/_design/test/_update/welcome2/test?name=test","query":{"name":"test"},"headers":{"Accept":"application/json","Accept-Encoding":"gzip, deflate","Accept-Language":"en-US,en;q=0.5","Connection":"keep-alive","Content-Length":"0","Content-Type":"application/json; charset=UTF-8","Host":"localhost:5984","Referer":"http://localhost:5984/_utils/couch_tests.html?script/couch_tests.js","User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0","x-couchdb-requested-path":"/test_suite_db/_design/test/_rewrite/welcome3/test"},"body":"","peer":"127.0.0.1","form":{},"cookie":{},"userCtx":{"db":"test_suite_db","name":null,"roles":["_admin"]},"secObj":{}}]]
+STDOUT 1721: ["up",{"_id":"test","name":"test"},{"body":"New World"}]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["ddoc","_design/test",["shows","welcome2"],[{"_id":"test","_rev":"1-49ce25e3db701c8cb613c1fd18d99619","name":"test","_revisions":{"start":1,"ids":["49ce25e3db701c8cb613c1fd18d99619"]}},{"info":{"db_name":"test_suite_db","doc_count":18,"doc_del_count":0,"update_seq":19,"purge_seq":0,"compact_running":false,"disk_size":9829,"data_size":5124,"instance_start_time":"1359566304089086","disk_format_version":6,"committed_update_seq":0},"id":"test","uuid":"c3e093a931e8e21c58013f7959001d1b","method":"GET","requested_path":["test_suite_db","_design","test","_rewrite","welcome3","test"],"path":["test_suite_db","_design","test","_show","welcome2","test"],"raw_path":"/test_suite_db/_design/test/_show/welcome2/test?name=test","query":{"name":"test"},"headers":{"Accept":"application/json","Accept-Encoding":"gzip, deflate","Accept-Language":"en-US,en;q=0.5","Connection":"keep-alive","Content-Type":"application/json","Host":"localhost:5984","Referer":"http://localhost:5984/_utils/couch_tests.html?script/couch_tests.js","User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0","x-couchdb-requested-path":"/test_suite_db/_design/test/_rewrite/welcome3/test"},"body":"undefined","peer":"127.0.0.1","form":{},"cookie":{},"userCtx":{"db":"test_suite_db","name":null,"roles":["_admin"]},"secObj":{}}]]
+STDOUT 1721: ["resp",{"body":"Welcome test"}]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.integer) {\n                  emit(doc.integer, doc.string);\n                }\n                \n              })"]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit([doc.a, doc.b], doc.string);\n                }\n              })"]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit(doc.a, doc.string);\n                }\n              })"]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit(doc.b, doc.string);\n                }\n              })"]
+STDOUT 1721: true
+STDIN 1721: ["map_doc",{"_id":"0","_rev":"1-f656cd1a0042ef6e0958b428fe7bfb06","integer":0,"string":"0"}]
+STDOUT 1721: [[], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"1","_rev":"1-7ece8efbef651dc8e2c359bc6dcef808","integer":1,"string":"1"}]
+STDOUT 1721: [[[1,"1"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"2","_rev":"1-478fb5fc57ba2089bc2f59bba7a9d461","integer":2,"string":"2"}]
+STDOUT 1721: [[[2,"2"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"3","_rev":"1-3053f309b150e09ff17864eb014303e3","integer":3,"string":"3"}]
+STDOUT 1721: [[[3,"3"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"4","_rev":"1-d528a53e5fda9db9a880bb87f0569ada","integer":4,"string":"4"}]
+STDOUT 1721: [[[4,"4"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"5","_rev":"1-6272df1bc7b233a27b4c73c9edc6157e","integer":5,"string":"5"}]
+STDOUT 1721: [[[5,"5"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"6","_rev":"1-a464eb169bf4bef03f2da25a92d683de","integer":6,"string":"6"}]
+STDOUT 1721: [[[6,"6"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"7","_rev":"1-be2f70ef4d651cc3b00116b885cc8f3f","integer":7,"string":"7"}]
+STDOUT 1721: [[[7,"7"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"8","_rev":"1-bbc9c5c25be0160f6586cb7debd01d86","integer":8,"string":"8"}]
+STDOUT 1721: [[[8,"8"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"9","_rev":"1-6ab31ac521c4ed8b040735cf2b5905c8","integer":9,"string":"9"}]
+STDOUT 1721: [[[9,"9"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401f178","_rev":"1-da183d125d6a08c98e9884b6db83b201","a":{"c":1},"b":"","string":"doc 5","type":"complex"}]
+STDOUT 1721: [[], [[[{"c":1},""],"doc 5"]], [[{"c":1},"doc 5"]], [["","doc 5"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401f291","_rev":"1-1b8b39a753fc6c4472513a329a4c80a3","a":"test","b":["test","essai"],"string":"doc 4","type":"complex"}]
+STDOUT 1721: [[], [[["test",["test","essai"]],"doc 4"]], [["test","doc 4"]], [[["test","essai"],"doc 4"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401f2ff","_rev":"1-b4408cd643c7813fc289ca3e66634bf1","a":"test","b":{},"string":"doc 3","type":"complex"}]
+STDOUT 1721: [[], [[["test",{}],"doc 3"]], [["test","doc 3"]], [[{},"doc 3"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401f848","_rev":"1-87fa24b167e0a1f73ff68e65a5686e57","a":1,"b":2,"string":"doc 2","type":"complex"}]
+STDOUT 1721: [[], [[[1,2],"doc 2"]], [[1,"doc 2"]], [[2,"doc 2"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc840200bd","_rev":"1-250cfbe292e9ee14f74a17e86c37c321","a":1,"b":1,"string":"doc 1","type":"complex"}]
+STDOUT 1721: [[], [[[1,1],"doc 1"]], [[1,"doc 1"]], [[1,"doc 1"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401eee8","_rev":"2-ad4e16b816de08d089d135d42c08062a","word":"plankton","name":"Rusty","world":"hello","edited_by":{"db":"test_suite_db","name":null,"roles":["_admin"]}}]
+STDOUT 1721: [[], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"test","_rev":"1-49ce25e3db701c8cb613c1fd18d99619","name":"test"}]
+STDOUT 1721: [[], [], [], []]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["ddoc","_design/test",["updates","hello"],[{"_id":"e6a925b26a5ddd0c42a335fc8401c370","_rev":"1-3e6cde7286c8b41dc36a5bf9ca346449","word":"plankton","name":"Rusty","_revisions":{"start":1,"ids":["3e6cde7286c8b41dc36a5bf9ca346449"]}},{"info":{"db_name":"test_suite_db/with_slashes","doc_count":17,"doc_del_count":0,"update_seq":17,"purge_seq":0,"compact_running":false,"disk_size":7016,"data_size":4776,"instance_start_time":"1359566305659209","disk_format_version":6,"committed_update_seq":0},"id":"e6a925b26a5ddd0c42a335fc8401c370","uuid":"c3e093a931e8e21c58013f7959003a19","method":"PUT","requested_path":["test_suite_db/with_slashes","_design","test","_rewrite","hello","e6a925b26a5ddd0c42a335fc8401c370"],"path":["test_suite_db/with_slashes","_design","test","_update","hello","e6a925b26a5ddd0c42a335fc8401c370"],"raw_path":"/test_suite_db%2Fwith_slashes/_design/test/_update/hello/e6a925b26a5ddd0c42a335fc8401c370?id=e6a925b26a5ddd0c42a335fc8401c370","query":{"id":"e6a925b26a5ddd0c42a335fc8401c370"},"headers":{"Accept":"application/json","Accept-Encoding":"gzip, deflate","Accept-Language":"en-US,en;q=0.5","Connection":"keep-alive","Content-Length":"0","Content-Type":"application/json; charset=UTF-8","Host":"localhost:5984","Referer":"http://localhost:5984/_utils/couch_tests.html?script/couch_tests.js","User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0","x-couchdb-requested-path":"/test_suite_db%2Fwith_slashes/_design/test/_rewrite/hello/e6a925b26a5ddd0c42a335fc8401c370"},"body":"","peer":"127.0.0.1","form":{},"cookie":{},"userCtx":{"db":"test_suite_db/with_slashes","name":null,"roles":["_admin"]},"secObj":{}}]]
+STDOUT 1721: ["up",{"_id":"e6a925b26a5ddd0c42a335fc8401c370","_rev":"1-3e6cde7286c8b41dc36a5bf9ca346449","word":"plankton","name":"Rusty","_revisions":{"start":1,"ids":["3e6cde7286c8b41dc36a5bf9ca346449"]},"world":"hello","edited_by":{"db":"test_suite_db/with_slashes","name":null,"roles":["_admin"]}},{"body":"hello doc"}]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["ddoc","_design/test",["updates","welcome2"],[null,{"info":{"db_name":"test_suite_db/with_slashes","doc_count":17,"doc_del_count":0,"update_seq":18,"purge_seq":0,"compact_running":false,"disk_size":8420,"data_size":4919,"instance_start_time":"1359566305659209","disk_format_version":6,"committed_update_seq":0},"id":"test","uuid":"c3e093a931e8e21c58013f7959003ccd","method":"PUT","requested_path":["test_suite_db/with_slashes","_design","test","_rewrite","welcome3","test"],"path":["test_suite_db/with_slashes","_design","test","_update","welcome2","test"],"raw_path":"/test_suite_db%2Fwith_slashes/_design/test/_update/welcome2/test?name=test","query":{"name":"test"},"headers":{"Accept":"application/json","Accept-Encoding":"gzip, deflate","Accept-Language":"en-US,en;q=0.5","Connection":"keep-alive","Content-Length":"0","Content-Type":"application/json; charset=UTF-8","Host":"localhost:5984","Referer":"http://localhost:5984/_utils/couch_tests.html?script/couch_tests.js","User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0","x-couchdb-requested-path":"/test_suite_db%2Fwith_slashes/_design/test/_rewrite/welcome3/test"},"body":"","peer":"127.0.0.1","form":{},"cookie":{},"userCtx":{"db":"test_suite_db/with_slashes","name":null,"roles":["_admin"]},"secObj":{}}]]
+STDOUT 1721: ["up",{"_id":"test","name":"test"},{"body":"New World"}]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["ddoc","_design/test",["shows","welcome2"],[{"_id":"test","_rev":"1-49ce25e3db701c8cb613c1fd18d99619","name":"test","_revisions":{"start":1,"ids":["49ce25e3db701c8cb613c1fd18d99619"]}},{"info":{"db_name":"test_suite_db/with_slashes","doc_count":18,"doc_del_count":0,"update_seq":19,"purge_seq":0,"compact_running":false,"disk_size":9853,"data_size":5143,"instance_start_time":"1359566305659209","disk_format_version":6,"committed_update_seq":0},"id":"test","uuid":"c3e093a931e8e21c58013f7959003e55","method":"GET","requested_path":["test_suite_db/with_slashes","_design","test","_rewrite","welcome3","test"],"path":["test_suite_db/with_slashes","_design","test","_show","welcome2","test"],"raw_path":"/test_suite_db%2Fwith_slashes/_design/test/_show/welcome2/test?name=test","query":{"name":"test"},"headers":{"Accept":"application/json","Accept-Encoding":"gzip, deflate","Accept-Language":"en-US,en;q=0.5","Connection":"keep-alive","Content-Type":"application/json","Host":"localhost:5984","Referer":"http://localhost:5984/_utils/couch_tests.html?script/couch_tests.js","User-Agent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0","x-couchdb-requested-path":"/test_suite_db%2Fwith_slashes/_design/test/_rewrite/welcome3/test"},"body":"undefined","peer":"127.0.0.1","form":{},"cookie":{},"userCtx":{"db":"test_suite_db/with_slashes","name":null,"roles":["_admin"]},"secObj":{}}]]
+STDOUT 1721: ["resp",{"body":"Welcome test"}]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.integer) {\n                  emit(doc.integer, doc.string);\n                }\n                \n              })"]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit([doc.a, doc.b], doc.string);\n                }\n              })"]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit(doc.a, doc.string);\n                }\n              })"]
+STDOUT 1721: true
+STDIN 1721: ["add_fun","(function (doc) {\n                if (doc.type == \"complex\") {\n                  emit(doc.b, doc.string);\n                }\n              })"]
+STDOUT 1721: true
+STDIN 1721: ["map_doc",{"_id":"0","_rev":"1-f656cd1a0042ef6e0958b428fe7bfb06","integer":0,"string":"0"}]
+STDOUT 1721: [[], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"1","_rev":"1-7ece8efbef651dc8e2c359bc6dcef808","integer":1,"string":"1"}]
+STDOUT 1721: [[[1,"1"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"2","_rev":"1-478fb5fc57ba2089bc2f59bba7a9d461","integer":2,"string":"2"}]
+STDOUT 1721: [[[2,"2"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"3","_rev":"1-3053f309b150e09ff17864eb014303e3","integer":3,"string":"3"}]
+STDOUT 1721: [[[3,"3"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"4","_rev":"1-d528a53e5fda9db9a880bb87f0569ada","integer":4,"string":"4"}]
+STDOUT 1721: [[[4,"4"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"5","_rev":"1-6272df1bc7b233a27b4c73c9edc6157e","integer":5,"string":"5"}]
+STDOUT 1721: [[[5,"5"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"6","_rev":"1-a464eb169bf4bef03f2da25a92d683de","integer":6,"string":"6"}]
+STDOUT 1721: [[[6,"6"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"7","_rev":"1-be2f70ef4d651cc3b00116b885cc8f3f","integer":7,"string":"7"}]
+STDOUT 1721: [[[7,"7"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"8","_rev":"1-bbc9c5c25be0160f6586cb7debd01d86","integer":8,"string":"8"}]
+STDOUT 1721: [[[8,"8"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"9","_rev":"1-6ab31ac521c4ed8b040735cf2b5905c8","integer":9,"string":"9"}]
+STDOUT 1721: [[[9,"9"]], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401cf85","_rev":"1-da183d125d6a08c98e9884b6db83b201","a":{"c":1},"b":"","string":"doc 5","type":"complex"}]
+STDOUT 1721: [[], [[[{"c":1},""],"doc 5"]], [[{"c":1},"doc 5"]], [["","doc 5"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401d325","_rev":"1-1b8b39a753fc6c4472513a329a4c80a3","a":"test","b":["test","essai"],"string":"doc 4","type":"complex"}]
+STDOUT 1721: [[], [[["test",["test","essai"]],"doc 4"]], [["test","doc 4"]], [[["test","essai"],"doc 4"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401d514","_rev":"1-b4408cd643c7813fc289ca3e66634bf1","a":"test","b":{},"string":"doc 3","type":"complex"}]
+STDOUT 1721: [[], [[["test",{}],"doc 3"]], [["test","doc 3"]], [[{},"doc 3"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401e26a","_rev":"1-87fa24b167e0a1f73ff68e65a5686e57","a":1,"b":2,"string":"doc 2","type":"complex"}]
+STDOUT 1721: [[], [[[1,2],"doc 2"]], [[1,"doc 2"]], [[2,"doc 2"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401e896","_rev":"1-250cfbe292e9ee14f74a17e86c37c321","a":1,"b":1,"string":"doc 1","type":"complex"}]
+STDOUT 1721: [[], [[[1,1],"doc 1"]], [[1,"doc 1"]], [[1,"doc 1"]]]
+STDIN 1721: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8401c370","_rev":"2-74a7a840053c2da407f96a65647e86c0","word":"plankton","name":"Rusty","world":"hello","edited_by":{"db":"test_suite_db/with_slashes","name":null,"roles":["_admin"]}}]
+STDOUT 1721: [[], [], [], []]
+STDIN 1721: ["map_doc",{"_id":"test","_rev":"1-49ce25e3db701c8cb613c1fd18d99619","name":"test"}]
+STDOUT 1721: [[], [], [], []]
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+STDIN 1721: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1721: true
+Exit 1721

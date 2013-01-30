@@ -1,0 +1,57 @@
+couchjs 1135: /home/jhs/src/iris/couchdb/share/server/main.js
+Call main
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["add_fun","(function (doc){\n    if (doc.a==4)\n      emit(null, doc.b);\n  })"]
+STDOUT 1135: true
+STDIN 1135: ["map_doc",{"_id":"0","_rev":"1-fb8a93eb436b7e799a7bbc578a08e9a5","a":1,"b":1}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"1","_rev":"1-2b6adfdea4e0fd276a861f663cf984ba","a":2,"b":4}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"2","_rev":"1-3a0bf449367880a229ea7c61f9394c83","a":3,"b":9}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"3","_rev":"1-211c37537c043fcb1c4b4936b843966c","a":4,"b":16}]
+STDOUT 1135: [[[null,16]]]
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["add_fun","(function (doc){\n    if (doc.a==4)\n      emit(null, doc.b);\n  })"]
+STDOUT 1135: true
+STDIN 1135: ["map_doc",{"_id":"0","_rev":"2-f11d7cac727db1834815181e355127f6","a":4,"b":1}]
+STDOUT 1135: [[[null,1]]]
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["add_fun","(function (doc){\n    if (doc.a==4)\n      emit(null, doc.b);\n  })"]
+STDOUT 1135: true
+STDIN 1135: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8402f97a","_rev":"1-3a0bf449367880a229ea7c61f9394c83","a":3,"b":9}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8402eb8a","_rev":"1-211c37537c043fcb1c4b4936b843966c","a":4,"b":16}]
+STDOUT 1135: [[[null,16]]]
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["add_fun","(function (doc){\n    if (doc.a==4)\n      emit(null, doc.b);\n  })"]
+STDOUT 1135: true
+STDIN 1135: ["map_doc",{"_id":"1","_rev":"1-2b6adfdea4e0fd276a861f663cf984ba","a":2,"b":4}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"2","_rev":"1-3a0bf449367880a229ea7c61f9394c83","a":3,"b":9}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"3","_rev":"1-211c37537c043fcb1c4b4936b843966c","a":4,"b":16}]
+STDOUT 1135: [[[null,16]]]
+STDIN 1135: ["map_doc",{"_id":"0","_rev":"2-f11d7cac727db1834815181e355127f6","a":4,"b":1}]
+STDOUT 1135: [[[null,1]]]
+STDIN 1135: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8402f97a","_rev":"1-3a0bf449367880a229ea7c61f9394c83","a":3,"b":9}]
+STDOUT 1135: [[]]
+STDIN 1135: ["map_doc",{"_id":"e6a925b26a5ddd0c42a335fc8402eb8a","_rev":"1-211c37537c043fcb1c4b4936b843966c","a":4,"b":16}]
+STDOUT 1135: [[[null,16]]]
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["reduce",["(function (keys, values){\n    return sum(values);\n  })"],[[[null,"0"],1],[[null,"3"],16],[[null,"e6a925b26a5ddd0c42a335fc8402eb8a"],16]]]
+STDOUT 1135: [true,[33]]
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["reduce",["(function (keys, values){\n    return sum(values);\n  })"],[[[null,"e6a925b26a5ddd0c42a335fc8402eb8a"],16],[[null,"3"],16],[[null,"0"],1]]]
+STDOUT 1135: [true,[33]]
+STDIN 1135: ["reset",{"reduce_limit":true,"timeout":5000}]
+STDOUT 1135: true
+STDIN 1135: ["add_fun","(function (doc){\n    if (doc.a==4)\n      emit(null, doc.b);\n  })"]
+STDOUT 1135: true
+Exit 1135
