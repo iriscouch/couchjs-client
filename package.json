@@ -12,6 +12,7 @@
 
 , "dependencies": { "optimist": "~0.3.4"
                   , "couchjs" : "~0.2.0"
+                  , "obj_diff": "~0.3.0"
                   }
 
 , "devDependencies": { "tap": "~0.2.5"
