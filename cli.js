@@ -243,7 +243,7 @@ function is_deep_equal(expect, obj) {
     return true
   }
 
-  if(~['boolean', 'number'].indexOf(obj_type))
+  if(~['boolean', 'number', 'string'].indexOf(obj_type))
     return expect === obj
 
   throw new Error('Unknown type: ' + obj_type)
