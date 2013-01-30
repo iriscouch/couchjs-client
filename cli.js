@@ -103,8 +103,11 @@ function confirm_log(couchjs, log_filename, callback) {
     , pass = {}
     , fail = {}
 
-  log_data.pipe(log)
+  var start = new Date
+    , stop = null
+
   couchjs.stdout.resume()
+  log_data.pipe(log)
 
   function log_line(line) {
     var match = line.match(io_re)
@@ -189,6 +192,7 @@ function confirm_log(couchjs, log_filename, callback) {
   }
 
   function couchjs_end() {
+    stop = new Date
     ended.couchjs = true
     wrapup()
   }
@@ -197,13 +201,22 @@ function confirm_log(couchjs, log_filename, callback) {
     if(!ended.log || !ended.couchjs)
       return
 
-    console.log('Finished running log through couchjs')
+    var ms = stop - start
+      , elapsed_s = ms / 1000
+      , elapsed = (ms > 1000)
+                    ? (ms / 1000).toFixed(2) + ' s'
+                    : ms + ' ms'
+
+    console.log('Finished in %s s: %s', elapsed, log_filename)
+
     console.log('Passes:')
     for (var method in pass)
       console.log('  %s: %s', method, pass[method])
     console.log('Fails:')
     for (var method in fail)
       console.log('  %s: %s', method, fail[method])
+
+    console.log('')
   }
 }
 
