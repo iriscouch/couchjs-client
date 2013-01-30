@@ -19,7 +19,6 @@
 var fs = require('fs')
 var util = require('util')
 var optimist = require('optimist')
-var obj_diff = require('obj_diff')
 var child_process = require('child_process')
 
 var client = require('./client')
